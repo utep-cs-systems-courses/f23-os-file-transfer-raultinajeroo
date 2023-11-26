@@ -11,8 +11,6 @@ switchesVarDefaults = (
     (('-?', '--usage'), "usage", False), # boolean (set if present)
     )
 
-
-
 progname = "echoserver"
 paramMap = params.parseParams(switchesVarDefaults)
 
