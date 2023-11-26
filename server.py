@@ -47,9 +47,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
                     client, address = server.accept()
                     input.append(client)
                 else:
-                    received_data = sock.recv(1024).decode().split()
-                    action = received_data[0]
-                    path = received_data[1]
+                    action, path = sock.recv(512).decode().split()
                     if action == "transfer":
                         arc.request(sock, path, client=False, tag="tra")
                     elif action == "request":
