@@ -47,16 +47,20 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
                     client, address = server.accept()
                     input.append(client)
                 else:
-                    action, path = sock.recv(512).decode().split()
+                    data = sock.recv(512).decode()
+                    # Close the connection if client sends an empty message
+                    if data == "":
+                        print("Closing connection with a client")
+                        input.remove(sock)
+                        sock.close()
+                        continue
+
+                    # Transfer / Receive files
+                    action, path = data.split()
                     if action == "transfer":
                         arc.request(sock, path, client=False, tag="tra")
                     elif action == "request":
                         arc.transfer(sock, path, client=False)
-                    elif action == "":
-                        # Close the connection if client sends an empty message
-                        print("Closing connection with a client")
-                        input.remove(sock)
-                        sock.close()
     except KeyboardInterrupt:
         print("Closing server...")
         for sock in input:

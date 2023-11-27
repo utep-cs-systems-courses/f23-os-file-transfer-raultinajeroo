@@ -68,9 +68,9 @@ def get_paths(choice):
 
 
 def client_interaction(server):
-    ps = "-------------------------------\n"  # Print Start
     while True:
-        print(ps + "What would you like to do?")
+        print("-------------------------------\n")
+        print("What would you like to do?")
         print("1. Transfer file(s)")
         print("2. Request file(s)")
         print("3. Exit")
